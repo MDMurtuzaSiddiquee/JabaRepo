@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="jabaTests.To_Verify_Login_page">
+        <methods>
+          <include name="Login" invocation-numbers="1 2"/>
+          <include name="Closer"/>
+          <include name="OpenApplication"/>
+        </methods>
+      </class> <!-- jabaTests.To_Verify_Login_page -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

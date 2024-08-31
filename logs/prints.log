@@ -1,0 +1,19 @@
+21:53:10.969 [main] DEBUG jabaTests.To_Verify_Login_page - task5 created
+21:53:11.231 [main] DEBUG jabaTests.To_Verify_Login_page - AddTask clicked
+21:53:11.545 [main] DEBUG jabaTests.To_Verify_Login_page - addNewTask got entered
+21:53:11.819 [main] DEBUG jabaTests.To_Verify_Login_page - taskDate got entered
+21:53:12.178 [main] DEBUG jabaTests.To_Verify_Login_page - platform got selected
+21:53:12.786 [main] DEBUG jabaTests.To_Verify_Login_page - socialMedia got selected
+21:53:13.185 [main] DEBUG jabaTests.To_Verify_Login_page - task6 created
+21:53:13.656 [main] DEBUG jabaTests.To_Verify_Login_page - requirement got entered
+21:53:13.858 [main] DEBUG jabaTests.To_Verify_Login_page - requirement created
+21:53:14.147 [main] DEBUG jabaTests.To_Verify_Login_page - preview got clicked
+21:53:57.906 [main] DEBUG jabaTests.To_Verify_Login_page - Campaign is created
+21:53:58.053 [main] DEBUG jabaTests.To_Verify_Login_page - Add Athlete is Clicked
+21:53:58.494 [main] DEBUG jabaTests.To_Verify_Login_page - Athlete Name got Entered
+21:53:58.682 [main] DEBUG jabaTests.To_Verify_Login_page - Athlete is displayed
+21:53:58.833 [main] DEBUG jabaTests.To_Verify_Login_page - Athlete is Selected
+21:53:58.945 [main] DEBUG jabaTests.To_Verify_Login_page - Athlete is Added in to the campaign
+21:53:58.984 [main] DEBUG jabaTests.To_Verify_Login_page - Generate Campaign Ideas page is displayed
+21:53:59.095 [main] DEBUG jabaTests.To_Verify_Login_page - Athlete is Added into the campaign
+21:54:01.644 [main] DEBUG jabaTests.To_Verify_Login_page - Congratulations, the campaign has been created with the desired athletes
