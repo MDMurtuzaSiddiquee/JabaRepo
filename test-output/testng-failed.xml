@@ -7,6 +7,8 @@
         <methods>
           <include name="NewCampaign"/>
           <include name="OpenApplication"/>
+          <include name="addCampAthlete"/>
+          <include name="login_Admin"/>
         </methods>
       </class> <!-- jabaTests.Create_NewCampaign_Admin -->
     </classes>

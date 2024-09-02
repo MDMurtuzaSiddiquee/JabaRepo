@@ -36,18 +36,102 @@ public class AddCampaignAthlete {
 		 return addTalentButton;	 
 	 }
 	 
-	 @FindBy(xpath ="(//div/p)[3]")
+	 @FindBy(xpath ="(//div/div/p)[2]")
 	 WebElement  sportDropDown;
 	 
 	 public WebElement sportDropDown(){
 		 return sportDropDown;	 
 	 }
 	 
-	 @FindBy(xpath ="//span[text()='Football']")
+	 @FindBy(xpath ="//span[text()='football']")
 	 WebElement  optionFootball;
 	 
 	 public WebElement optionFootball(){
 		 return optionFootball;
+	 }
+	 
+	 @FindBy(xpath ="//span[text()='volleyball']")
+	 WebElement  optionvolleyball;
+	 
+	 public WebElement optionvolleyball(){
+		 return optionvolleyball;
+	 }
+	 @FindBy(xpath ="//span[text()='bowling']")
+	 WebElement  optionBowling;
+	 
+	 public WebElement optionBowling(){
+		 return optionBowling;
+	 }
+	 @FindBy(xpath ="//span[text()='hockey']")
+	 WebElement  optionHockey;
+	 
+	 public WebElement optionHockey(){
+		 return optionHockey;
+	 }
+	 
+	 @FindBy(xpath ="//span[text()='rifle']")
+	 WebElement  optionRifle;
+	 
+	 public WebElement optionRifle(){
+		 return optionRifle;
+	 }
+	 @FindBy(xpath ="//span[text()='baseball']")
+	 WebElement  optionBaseball;
+	 
+	 public WebElement optionBaseball(){
+		 return optionBaseball;
+	 }
+	 
+	 @FindBy(xpath ="//span[text()='tennis']")
+	 WebElement  optionTennis;
+	 
+	 public WebElement optionTennis(){
+		 return optionTennis;
+	 }
+	 @FindBy(xpath ="//span[text()='soccer']")
+	 WebElement  optionSoccer;
+	 
+	 public WebElement optionSoccer(){
+		 return optionSoccer;
+	 }
+	 @FindBy(xpath ="//span[text()='track & field']")
+	 WebElement  optionTrackField;
+	 
+	 public WebElement optionTrackField(){
+		 return optionTrackField;
+	 }
+	 
+	 @FindBy(xpath ="//span[text()='table tennis']")
+	 WebElement  optionTableTennis;
+	 
+	 public WebElement optionTableTennis(){
+		 return optionTableTennis;
+	 }
+	 @FindBy(xpath ="//span[text()='gymnastics']")
+	 WebElement  optionGymnastics;
+	 
+	 public WebElement optionGymnastics(){
+		 return optionGymnastics;
+	 }
+	 
+	 @FindBy(xpath ="//span[text()='swimming']")
+	 WebElement  optionSwimming;
+	 
+	 public WebElement optionSwimming(){
+		 return optionSwimming;
+	 }
+	 
+	 @FindBy(xpath ="//span[text()='golf']")
+	 WebElement  optionGolf;
+	 
+	 public WebElement optionGolf(){
+		 return optionGolf;
+	 }
+	 @FindBy(xpath ="//span[text()='rowing']")
+	 WebElement  optionRowing;
+	 
+	 public WebElement optionRowing(){
+		 return optionRowing;
 	 }
 	 
 	 
@@ -86,6 +170,14 @@ public class AddCampaignAthlete {
 	 public WebElement athleteAdded(){
 		 return athleteAdded;
 	 }
+	 
+	 @FindBy(xpath ="(//div/div/h1)[1]")
+	 WebElement  searchedAthleteNme;
+	 
+	 public WebElement searchedAthleteNme(){
+		 return searchedAthleteNme;
+	 }
+	 
 	 
 	 @FindBy(xpath ="//button[text()='Send invite message']")
 	 WebElement  sendInviteMessage;

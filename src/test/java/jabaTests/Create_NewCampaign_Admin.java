@@ -2,7 +2,10 @@ package jabaTests;
 
 import java.io.IOException;
 import java.time.Duration;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +41,12 @@ public class Create_NewCampaign_Admin extends Base{
 	AddCampaignAthlete campAthlete;
 	WebDriverWait wait;
 	WebDriverWait wait1;
+	WebElement athleteAddButton;
+	WebElement athleteSport;
+	WebElement athleteCancelButton;
+	WebElement camptext;
+	Set<String> keys;
+	String[] keyArray;
 
 	
 	
@@ -95,11 +104,9 @@ public class Create_NewCampaign_Admin extends Base{
 
 @Test(priority = 2)
 public void NewCampaign() throws InterruptedException{
-//	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(35));
 	
 	newCamp= new JabaPage_CampaignCreate(driver);
 	
-//	Thread.sleep(3000);
 	
 	wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	
@@ -149,221 +156,108 @@ public void NewCampaign() throws InterruptedException{
 	log.debug("addCategoryButton got clicked");
 	
 	
-	//for task1
-	newCamp.addTask().click();
-	log.debug("AddTask clicked");
-        
-			newCamp.addNewTask().clear();
-			newCamp.addNewTask().sendKeys( prop.getProperty("addNewTask1"));
-        	log.debug("addNewTask got entered");
-			
-        	newCamp.taskDate().clear();
-//        	Thread.sleep(2000);
-        	newCamp.taskDate().sendKeys(prop.getProperty("tDate1"));
-        	log.debug("taskDate got entered");
-        	
-        	newCamp.platform().click();
-        	WebElement p1 = newCamp.platform();
-        	selectPlatform =new Select(p1);
-        	
-        	selectPlatform.selectByVisibleText(prop.getProperty("platform1"));
-        	log.debug("platform got selected");
-        	
+	
+	// Get the set of property names (keys)
+    keys = prop.stringPropertyNames();
+    
+    // Convert Set to an array for indexed access
+    keyArray = keys.toArray(new String[0]);
+    
+    
+    List<String> filterAddTask = new ArrayList<>();
+    List<String> filterDate = new ArrayList<>();
+    List<String> filterPlatform = new ArrayList<>();
+    List<String> filterSocialMedia = new ArrayList<>();
 
-        	newCamp.sMedia().click();
+
+    // Loop through the array and filter strings containing
+    for (String word : keyArray) {
+        if (word.contains("addNewTask")) {
+            filterAddTask.add(word);
+            log.debug("Task name got added");
+        }
+        if (word.contains("taskDate")) {
+        	filterDate.add(word);
+        	log.debug("Task date got added");
+        }
+        
+        if (word.contains("platform")) {
+        	filterPlatform.add(word);
+        	log.debug("Task platform got added");
+        }
+        if (word.contains("socialMedia")) {
+        	filterSocialMedia.add(word);
+        	log.debug("Task Social Media platform got added");
         	
+        }else {
+        	log.debug("error in the add task");
+        }
+           
+    }
+    
+    
+    // Convert List back to Array if needed
+    String[] taskArray = filterAddTask.toArray(new String[0]);
+    Arrays.sort(taskArray);
+    
+    String[] dateArray = filterDate.toArray(new String[0]);
+    Arrays.sort(dateArray);
+    
+    String[] platformArray = filterPlatform.toArray(new String[0]);
+    Arrays.sort(platformArray);
+    
+    String[] socialMediaArray = filterSocialMedia.toArray(new String[0]);
+    Arrays.sort(socialMediaArray);
+    
+    int taskN = taskArray.length;
+
+
+    for (int i = 0; i < taskN; i++) {
+        String taskkey = taskArray[i];
+        String datekey = dateArray[i];
+        String platformkey = platformArray[i];
+        String socialkey = socialMediaArray[i];
+
+        
+        newCamp.addTask().click();
+    	log.debug("AddTask clicked");
+            
+    	newCamp.addNewTask().clear();
+    	newCamp.addNewTask().sendKeys(prop.getProperty(taskkey));
+        log.debug("addNewTask got entered");
+    	newCamp.taskDate().clear();
+
+		newCamp.taskDate().sendKeys(prop.getProperty(datekey));
+		log.debug("taskDate got entered");
+		
+		newCamp.platform().click();
+    	WebElement p1 = newCamp.platform();
+    	selectPlatform =new Select(p1);
+    	
+    	selectPlatform.selectByVisibleText(prop.getProperty(platformkey));
+    	log.debug("platform got selected");
+        
+      String value = prop.getProperty(platformkey);
+      
+		if (value.contains("Social") ) {
+			
+			newCamp.sMedia().click();
         	p2 = newCamp.sMedia();
         	selectSocial =new Select(p2);
         	
-        	selectSocial.selectByVisibleText(prop.getProperty("socialMedia1"));
+        	selectSocial.selectByVisibleText(prop.getProperty(socialkey));
         	log.debug("socialMedia got selected");
-        	
-        	newCamp.sMedia().click();        	
-        	
-        	newCamp.addButton().click();
-        	log.debug("task1 created");
-        	
-        	//for task2
-        	newCamp.addTask().click();
-        	log.debug("AddTask clicked");
-                
-        			newCamp.addNewTask().clear();
-        			newCamp.addNewTask().sendKeys( prop.getProperty("addNewTask2"));
-                	log.debug("addNewTask got entered");
-        			
-                	newCamp.taskDate().clear();
-//                	Thread.sleep(2000);
-                	newCamp.taskDate().sendKeys(prop.getProperty("tDate2"));
-                	log.debug("taskDate got entered");
-                	
-                	newCamp.platform().click();
-                	
-//                	selectPlatform =new Select(newCamp.platform());
-                	
-                	selectPlatform.selectByVisibleText(prop.getProperty("platform1"));
-                	log.debug("platform got selected");
-                	
-                	
-                	
-//                	WebElement p3 = newCamp.sMedia();
-//                	 select3 = new Select(p3);
-                	
-                	 selectSocial.selectByVisibleText(prop.getProperty("socialMedia2"));
-                	log.debug("socialMedia got selected");
-                	
-                	
-                	
-                	
+        	newCamp.sMedia().click(); 
 
-                	newCamp.sMedia().click();
-////                	select2 =new Select(newCamp.platform());
-//                	
-//                	new Select(newCamp.platform()).selectByVisibleText(prop.getProperty("socialMedia2"));
-//                	log.debug("socialMedia got selected");
-                	
-                	newCamp.sMedia().click();        	
-                	
-                	newCamp.addButton().click();
-                	log.debug("task2 created");
-                	
-                	//for Task3
-                	
-                	newCamp.addTask().click();
-                	log.debug("AddTask clicked");
-                        
-                			newCamp.addNewTask().clear();
-                			newCamp.addNewTask().sendKeys( prop.getProperty("addNewTask3"));
-                        	log.debug("addNewTask got entered");
-                			
-                        	newCamp.taskDate().clear();
-//                        	Thread.sleep(2000);
-                        	newCamp.taskDate().sendKeys(prop.getProperty("tDate3"));
-                        	log.debug("taskDate got entered");
-                        	
-                        	newCamp.platform().click();
-//                        	select =new Select(newCamp.platform());
-                        	
-                        	selectPlatform.selectByVisibleText(prop.getProperty("platform1"));
-                        	log.debug("platform got selected");
-                        	
+		}
+	  	newCamp.addButton().click();
+    	log.debug("task1 created");
+        
+    }
 
-                        	newCamp.sMedia().click();
-                        	
-                        	
-//                        	select2 =new Select(newCamp.platform());
-                        	
-                        	selectSocial.selectByVisibleText(prop.getProperty("socialMedia2"));
-                        	log.debug("socialMedia got selected");
-                        	
-                        	newCamp.sMedia().click();        	
-                        	
-                        	newCamp.addButton().click();
-                        	log.debug("task created");
-                        	
-                        	//for Task4
-                        	
-                        	newCamp.addTask().click();
-                        	log.debug("AddTask clicked");
-                                
-                        			newCamp.addNewTask().clear();
-                        			newCamp.addNewTask().sendKeys( prop.getProperty("addNewTask4"));
-                                	log.debug("addNewTask got entered");
-                        			
-                                	newCamp.taskDate().clear();
-//                                	Thread.sleep(2000);
-                                	newCamp.taskDate().sendKeys(prop.getProperty("tDate4"));
-                                	log.debug("taskDate got entered");
-                                	
-                                	newCamp.platform().click();
-//                                	select =new Select(newCamp.platform());
-                                	
-                                	selectPlatform.selectByVisibleText(prop.getProperty("platform1"));
-                                	log.debug("platform got selected");
-                                	
-
-                                	newCamp.sMedia().click();
-                                	
-                                	
-//                                	select2 =new Select(newCamp.platform());
-                                	
-                                	selectSocial.selectByVisibleText(prop.getProperty("socialMedia2"));
-                                	log.debug("socialMedia got selected");
-                                	
-                                	newCamp.sMedia().click();        	
-                                	
-                                	newCamp.addButton().click();
-                                	log.debug("task4 created");
-                                	
-                                	//for Task5
-                                	
-                                	newCamp.addTask().click();
-                                	log.debug("AddTask clicked");
-                                        
-                                			newCamp.addNewTask().clear();
-                                			newCamp.addNewTask().sendKeys( prop.getProperty("addNewTask5"));
-                                        	log.debug("addNewTask got entered");
-                                			
-                                        	newCamp.taskDate().clear();
-//                                        	Thread.sleep(2000);
-                                        	newCamp.taskDate().sendKeys(prop.getProperty("tDate5"));
-                                        	log.debug("taskDate got entered");
-                                        	
-                                        	newCamp.platform().click();
-//                                        	select =new Select(newCamp.platform());
-                                        	
-                                        	selectPlatform.selectByVisibleText(prop.getProperty("platform1"));
-                                        	log.debug("platform got selected");
-                                        	
-
-                                        	newCamp.sMedia().click();
-                                        	
-                                        	
-//                                        	select2 =new Select(newCamp.platform());
-                                        	
-                                        	selectSocial.selectByVisibleText(prop.getProperty("socialMedia3"));
-                                        	log.debug("socialMedia got selected");
-                                        	
-                                        	newCamp.sMedia().click();        	
-                                        	
-                                        	newCamp.addButton().click();
-                                        	log.debug("task5 created");
-                                        	
-                                        	//for Task6
-                                        	
-                                        	newCamp.addTask().click();
-                                        	log.debug("AddTask clicked");
-                                                
-                                        			newCamp.addNewTask().clear();
-                                        			newCamp.addNewTask().sendKeys( prop.getProperty("addNewTask6"));
-                                                	log.debug("addNewTask got entered");
-                                        			
-                                                	newCamp.taskDate().clear();
-//                                                	Thread.sleep(2000);
-                                                	newCamp.taskDate().sendKeys(prop.getProperty("tDate6"));
-                                                	log.debug("taskDate got entered");
-                                                	
-                                                	newCamp.platform().click();
-//                                                	select =new Select(newCamp.platform());
-                                                	
-                                                	selectPlatform.selectByVisibleText(prop.getProperty("platform1"));
-                                                	log.debug("platform got selected");
-                                                	
-
-                                                	newCamp.sMedia().click();
-                                                	
-                                                	
-//                                                	select2 =new Select(newCamp.platform());
-                                                	
-                                                	selectSocial.selectByVisibleText(prop.getProperty("socialMedia3"));
-                                                	log.debug("socialMedia got selected");
-                                                	
-                                                	newCamp.sMedia().click();        	
-                                                	
-                                                	newCamp.addButton().click();
-                                                	log.debug("task6 created");
-                                                	
-                                                	
-                                                	// Add Requirment
+//	Thread.sleep(5000);
+	
+                                           			// Add Requirment
                                                 	
                                                 	newCamp.addRequirement().click();
                                                 	newCamp.requirementTextField().sendKeys(prop.getProperty("requirement"));
@@ -383,22 +277,19 @@ public void NewCampaign() throws InterruptedException{
                                                 	action=new Actions(driver);
                                                 	
                                                 	
-//                                                	Thread.sleep(2000);
+                                                	Thread.sleep(2000);
                                                 	
                                                 	wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
 
                                                 	Actions someChangeButton = action.moveToElement(newCamp.someChangesButton());
+                                                	
                                                 	someChangeButton.click().perform();
+                                                	Thread.sleep(2000);
 
                                                 	newCamp.previewButton().click();
                                                 	log.debug("preview got clicked");
                                                 	
-                                                	
-                                                	
-//                                                	WebElement looksgood = wait.until(ExpectedConditions.visibilityOf(newCamp.looksgoodButton()));
-                                               
-//                                                	String looks = looksgood.getText();
-//                                                	System.out.println(looks);
+                               
                                                 	
                                                 	WebElement looksgood1 = wait1.until(ExpectedConditions.elementToBeClickable(newCamp.looksgoodButton()));
                                                 	String looksgood = looksgood1.getText();
@@ -413,27 +304,21 @@ public void NewCampaign() throws InterruptedException{
                                                 	
                                                 	
 			}
-                                                	
-                                                	
-                                                	     
+
+                             	     
                                               
               @Test(priority = 3)
               public void addCampAthlete() throws InterruptedException {
-            	  
-            	  
-            	  Thread.sleep(2000);
-            	campAthlete = new AddCampaignAthlete(driver);
 
-            	
-            	campAthlete.cancelButton().click();
-            	
-//            	wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-//            	
-//            	WebElement athleteCancelButton = wait.until(ExpectedConditions.visibilityOf(campAthlete.cancelButton()));
+            	campAthlete = new AddCampaignAthlete(driver);
 //
-//            	athleteCancelButton.click();
+            	Thread.sleep(3000);
+       
+            	athleteCancelButton = wait.until(ExpectedConditions.elementToBeClickable(campAthlete.cancelButton()));
+
+            	athleteCancelButton.click();
             	
-            	WebElement camptext = wait.until(ExpectedConditions.visibilityOf(newCamp.campName()));
+            	camptext = wait.until(ExpectedConditions.visibilityOf(newCamp.campName()));
             	
             	String campNametext = camptext.getText();
             	
@@ -442,50 +327,118 @@ public void NewCampaign() throws InterruptedException{
             	String expectedResult = prop.getProperty("campaignName");
             	
             	Assert.assertEquals(campNametext, expectedResult);
-            	
             	log.debug("Campaign is created");
             	
+            	Thread.sleep(3000);
             	
-            	
-            	
-            	
-            	
-            	
-            	
-            	WebElement athleteAddButton = wait.until(ExpectedConditions.visibilityOf(campAthlete.addTalentButton()));
+            	athleteAddButton = wait.until(ExpectedConditions.elementToBeClickable(campAthlete.addTalentButton()));
             	
             	athleteAddButton.click();
             	log.debug("Add Athlete is Clicked");
+
             	
-            	campAthlete.athleteSearchTextField().clear();
+//            	Thread.sleep(2000);
+
+                // Convert Set to an array for indexed access
+
+                List<String> filterAthletelist = new ArrayList<>();
+                List<String> filterSportlist = new ArrayList<>();
+                
+                
+                for (String words : keyArray) {
+                    if (words.contains("AddAthleteName")) {
+                    	filterAthletelist.add(words);
+                        log.debug("Task name got added");
+                    }
+                    if (words.contains("AthleteSport")) {
+                    	filterSportlist.add(words);
+                    	log.debug("Task date got added");
+                    }
+                    
+                  else {
+                    	log.debug("error in the add at");
+                    }
+                       
+                }
+
+                // Convert List back to Array if needed
+                String[] athleteArray = filterAthletelist.toArray(new String[0]);
+                Arrays.sort(athleteArray);
+                
+                String[] sportArray = filterSportlist.toArray(new String[0]);
+                Arrays.sort(sportArray);
+   
+                WebElement footballLocation = campAthlete.optionFootball();
+            	String prFootball = prop.getProperty("AthleteSport1");
             	
-            	campAthlete.athleteSearchTextField().sendKeys(prop.getProperty("AthleteName"));
-            	log.debug("Athlete Name got Entered");
+            	WebElement volleyballLocation = campAthlete.optionvolleyball();
+
+            	String prVolleyball = prop.getProperty("AthleteSport2");
             	
-            	
-            	WebElement athleteSport = campAthlete.sportDropDown();
-            	athleteSport.click();
-            	
-            	campAthlete.optionFootball().click();
-            	log.debug("Athlete is displayed");
-            	
-            	
-            	action= new Actions(driver);
-				action.moveToElement(campAthlete.firstAthlete()).click().perform();
-				log.debug("Athlete is Selected");
-            	
+            	for(int i=0; i<athleteArray.length;i++) {
+            		
+            		  String athletekey = athleteArray[i];
+            	        String sportskey = sportArray[i];
+            	        String sportValur = prop.getProperty(sportskey);
+            	        String athleteValur = prop.getProperty(athletekey);
+            	        
+            	        // clear the search text field
+            	        campAthlete.athleteSearchTextField().clear();
+            	        // Enter Athlete name into the Search text field.
+                    	campAthlete.athleteSearchTextField().sendKeys(prop.getProperty(athletekey));
+                    	log.debug("Athlete Name got Entered");
+                    	
+                    	//Click on Sport Drop Down
+                    	campAthlete.sportDropDown().click();
+                    	
+                    	if(sportValur == prFootball) {
+
+                    		footballLocation.click();
+                    		log.debug("option football is selected");
+                    		
+                    		String athleteNameSearched = campAthlete.searchedAthleteNme().getText();
+
+            				log.debug("Searched Athlete Name is displayed");
+            				//Verify the Athlete
+            				Assert.assertEquals(athleteNameSearched, athleteValur);
+            				//Add the athlete
+            				action= new Actions(driver);
+            				action.moveToElement(campAthlete.firstAthlete()).click().perform();
+            				log.debug(athleteValur+"Athlete is Selected");
+            				
+                    		
+                    		
+                    	}
+                    	else if(sportValur==prVolleyball) {
+                    		
+                    		volleyballLocation.click();
+                    		log.debug("option volleyball is selected");
+                    		
+                    		String athleteNameSearched = campAthlete.searchedAthleteNme().getText();
+            				log.debug("Searched Athlete Name is displayed");
+            				//Verify the Athlete
+            				Assert.assertEquals(athleteNameSearched, athleteValur);
+            				//Add the athlete
+            				action= new Actions(driver);
+            				action.moveToElement(campAthlete.firstAthlete()).click().perform();
+            				log.debug(athleteValur+"Athlete is Selected");
+                    		
+                    		
+                    	}else {
+                    		System.out.println("Athlete not Added");
+                    	}
+            	}
+
             	
 				campAthlete.nextButton().click();
 				log.debug("Athlete is Added in to the campaign");
 				
 				String GenerateCampaignIdeasPage = campAthlete.aIGenerateCampaignIdeasPage().getText();
-//				System.out.println(GenerateCampaignIdeasPage);
+				System.out.println(GenerateCampaignIdeasPage);
 				log.debug("Generate Campaign Ideas page is displayed");
 
 				Assert.assertEquals(GenerateCampaignIdeasPage, "Generate Campaign Ideas");
-				
-				
-				
+
 				campAthlete.notRightNowButton().click();
 				log.debug("Athlete is Added into the campaign");
 				
@@ -496,16 +449,21 @@ public void NewCampaign() throws InterruptedException{
 				Assert.assertEquals(athleteAddedSuccessFully, "Congratulations, the campaign has been created with the desired athletes");
 				log.debug("Congratulations, the campaign has been created with the desired athletes");
 
+				wait1.until(ExpectedConditions.elementToBeClickable(campAthlete.sendInviteMessage()));
+
+				String sendInviteButton = campAthlete.sendInviteMessage().getText();
+//				System.out.println(sendInviteButton);
+				log.debug("sendInviteMessage page is displayed");
+
+				Assert.assertEquals(sendInviteButton, "Send invite message");
 				
-//				
-//				wait1.until(ExpectedConditions.visibilityOf(campAthlete.sendInviteMessage()));
-////				
+				
 //				campAthlete.sendInviteMessage().click();
+				
+//				campAthlete.sendInviteMessageNextButton().click();
 //				
-////				campAthlete.sendInviteMessageNextButton().click();
-////				
-////				
-////				campAthlete.sendInviteMessageNextButton().click();
+//				
+//				campAthlete.sendInviteMessageNextButton().click();
 
 
 				
